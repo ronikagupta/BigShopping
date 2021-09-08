@@ -8,7 +8,6 @@ import 'antd/dist/antd.css';
 import { Radio } from 'antd';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { Button } from 'antd';
-import './Css/button.css'
 import { Store } from '@material-ui/icons';
 import { Sdata } from './Sdata'
 import { data } from 'browserslist';

@@ -1,13 +1,25 @@
 import React from 'react'
 import { FormComponent, FormContainer } from "react-authorize-net";
 import axios from "axios";
+import { useSelector, useDispatch } from 'react-redux';
+
 
 
 let clientKey = '2hsv7AdmtQk62xwAMQH675BhWK3vgwT8Xq3MK9RbTx8DEGA5SN5dfv7cW9G3rvwH';
 let apiLoginId = '69ph66RQBp';
 
 export default function Authnet() {
+    const data = useSelector((state) =>
+        state.cardItems
 
+
+    )
+    const price = useSelector((state) =>
+
+        state.cardItems.totalPrice
+
+
+    )
     const onErrorHandler = (response) => {
         debugger
         // setState({
@@ -30,7 +42,7 @@ export default function Authnet() {
                     "refId": "123456",
                     "transactionRequest": {
                         "transactionType": "authCaptureTransaction",
-                        "amount": "5",
+                        "amount": data.cardData.title,
                         "payment": {
                             "creditCard": {
                                 "cardNumber": "5424000000000015",
@@ -137,15 +149,15 @@ export default function Authnet() {
                     environment="sandbox"
                     onError={onErrorHandler}
                     onSuccess={onSuccessHandler}
-                    amount={23}
+                    amount={price}
                     component={FormComponent}
                     clientKey={clientKey}
                     apiLoginId={apiLoginId}
                 />
-                <order>
+                {/* <order>
                     <invoiceNumber>INV-12345</invoiceNumber>
                     <description>Golf Supplies</description>
-                </order>
+                </order> */}
 
             </div>
         </div>

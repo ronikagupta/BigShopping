@@ -1,24 +1,32 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { Card } from 'antd';
 import { Button } from 'antd';
 import { Sdata } from './Sdata'
 import { Row, Col } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-bootstrap';
+import { Link, NavLink } from 'react-router-dom'
 import Authnet from "../src/Authnet"
 const { Meta } = Card;
 
 
 export default function CartItems(props) {
-    const dispatch = useDispatch()
 
+    debugger
 
     const data = useSelector((state) =>
-        state.cardItems
+
+        state.cardItems.cardData
 
 
     )
+    const price = useSelector((state) =>
+
+        state.cardItems.totalPrice
+
+
+    )
+    const dispatch = useDispatch()
     console.log("length", data)
 
     return (
@@ -27,14 +35,14 @@ export default function CartItems(props) {
                 <Col span={12}>
                     <Card title="My Cart" style={{ fontSize: '15px' }}>
 
-                        {data.map((data) => (
+                        {data.map((data, index) => (
                             <Card type="inner" title='' extra={<a href="#"></a>}>
-                                <img alt="example" height="20%" width="20%" src={data.cardData.imgscr} />
-                                <Meta color="red" title={data.cardData.title} description={data.cardData.description} />
+                                <img alt="example" height="20%" width="20%" src={data?.imgscr} />
+                                <Meta color="red" title={data?.title} description={data?.description} />
 
                                 <div style={{ marginTop: "2%" }}>
                                     <Button>Save for later</Button>
-                                    <Button>Remove</Button>
+                                    <Button onClick={() => dispatch({ type: "REMOVE_To_Cart", payload: { index: index, data: data.title } })}>Remove</Button>
                                 </div>
                             </Card>
                         ))}
@@ -50,7 +58,7 @@ export default function CartItems(props) {
                                 <h6>Delivery Charges</h6>
                             </Col>
                             <Col span={12}>
-                                <h6>Price of {data.length} Items</h6>
+                                <h6> ${price}</h6>
 
                                 <h6 style={{ color: "red" }}>20% off</h6>
                                 <h6 style={{ color: "red" }}>-$12,00</h6>
@@ -62,10 +70,10 @@ export default function CartItems(props) {
             </Row>
 
             <div className="site-button-ghost-wrapper">
-                <a href='/Authnet'> <Button type="primary" danger ghost>
+                <NavLink to='/Authnet'> <Button type="primary" danger ghost>
                     PLACE ORDER
 
-                </Button></a>
+                </Button></NavLink>
             </div>
 
         </div >

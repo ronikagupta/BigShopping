@@ -7,12 +7,12 @@ import 'antd/dist/antd.css';
 import { Radio } from 'antd';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { Button } from 'antd';
-import './Css/button.css'
 import { Store } from '@material-ui/icons';
 import { Sdata } from './Sdata'
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from "../src/Services/Actions/actions";
 import CartItems from "./CartItems";
+import "./Css/Button.css"
 
 
 
@@ -46,7 +46,7 @@ export default function Cards(props) {
             <Meta title={props.cards.title} description={props.cards.description} />
             <div className="site-button-ghost-wrapper mt-3">
                 <Button onClick={() => dispatch({ type: "ADD_TO_CART", payload: props.cards })} ghost >ADD TO CART</Button>
-                <Button onClick={() => props.removeToCartHandler({})} ghost className="ms-1">REMOVE TO CART</Button>
+                <Button onClick={() => dispatch({ type: "Remove_To_Cart" })} ghost className="ms-1">REMOVE TO CART</Button>
             </div>
 
         </Card>
